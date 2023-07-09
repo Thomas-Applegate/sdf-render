@@ -18,7 +18,7 @@ private:
 
 public:
 	this() {
-		cam = Camera(vec3(0.0,0.0,0.0), 45, 90, 0, 0);
+		cam = Camera(vec3(0.0,0.0,0.0), 45, 90, 0);
 	}
 
 	this(SceneComponent[string] components) {
@@ -47,7 +47,7 @@ public:
 	}
 	
 	void render(Image i) {
-		
+		cam.cacheImageInfo(i);
 	}
 
 }
