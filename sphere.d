@@ -3,8 +3,9 @@ import vector;
 import renderable;
 import sdf;
 import material;
+import positionable;
 
-class Sphere : SceneComponent, Renderable {
+class Sphere : SceneComponent, Renderable, Positionable {
 private:
 	vec3 position;
 	double radius;
@@ -17,7 +18,7 @@ public:
 		this.mat = mat;
 	}
 	
-	void setPosition(vec3 position){ this.position = position; }
+	void setPosition(const vec3 position){ this.position = position; }
 	vec3 getPosition() const { return position; }
 	
 	void setRadius(double radius) { this.radius = radius; }
