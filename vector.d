@@ -106,3 +106,13 @@ vec3 reflect(const vec3 v, const vec3 n)
 {
 	return v - 2.0 * dot(v, n) * n;
 }
+
+//y is up, x is left right, z is forward back
+//theta and phi are in degrees
+//theta is measured from +x counterclockwise
+//phi is measured from the x axis going plus or minus 90 degrees up or down
+vec3 sphereCoord(double theta, double phi) {
+	theta *= 180/PI;
+	phi *= 180/PI;
+	return vec3(cos(phi)*cos(theta), sin(phi), cos(phi)*sin(theta));
+}

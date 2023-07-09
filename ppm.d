@@ -19,7 +19,7 @@ public:
 	}
 	
 	this(uint height, double aspectRatio) {
-		this(cast(uint)(aspectRatio * height), height);
+		this(cast(uint)(aspectRatio * height + 0.5), height);
 	}
 
 	uint getWidth() const {

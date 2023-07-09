@@ -1,6 +1,7 @@
 import vector;
+import scene;
 
-class Material {
+class Material : SceneComponent {
 private:
 	vec3 color;
 	
