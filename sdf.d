@@ -1,5 +1,5 @@
 import vector;
 
 interface SDF {
-	double sdf(vec3 point) const;
+	double sdf(const vec3 point) const;
 }

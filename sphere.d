@@ -1,9 +1,9 @@
 import scene;
 import vector;
-import material;
+import sdf;
 import scene;
 
-class Sphere : SceneComponent, Material {
+class Sphere : SceneComponent, Renderable {
 public:
 	vec3 position;
 	double radius;
@@ -24,8 +24,10 @@ public:
 	void setRadius(double radius) { this.radius = radius; }
 	double getRadius() const { return radius; }
 	
-	double sdf(vec3 point) const {
+	double sdf(const vec3 point) const {
 		vec3 t = point + position;
 		return t.length - radius;
 	}
+	
+	Material getMaterial() const { return new Material; }
 }

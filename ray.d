@@ -10,6 +10,7 @@ public:
 	{
 		O = o;
 		D = d;
+		D.makeUnitVector;
 	}
 
 	vec3 origin() const { return O; }

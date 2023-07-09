@@ -1,6 +1,3 @@
-import sdf;
-import vector;
+class Material {
 
-interface Material : SDF {
-	vec3 getColor() const;
 }
