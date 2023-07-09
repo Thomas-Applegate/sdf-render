@@ -15,7 +15,7 @@ struct Camera {
 	double ylowbound;
 	double yhighbound;
 	
-	this(vec3 pos, double hfov, double yaw, double pitch) {
+	this(vec3 pos, double hfov, double yaw, double pitch) @nogc {
 		this.pos = pos;
 		this.hfov = hfov;
 		this.yaw = yaw;
@@ -24,7 +24,7 @@ struct Camera {
 	
 	//must be called before computing view rays because theese
 	//divisions really only need to be done once
-	void cacheImageInfo(const Image i) {
+	void cacheImageInfo(const Image i) @nogc {
 		vfov = hfov / i.getAspectRatio;
 		xlowbound = yaw + hfov/2;
 		xhighbound = yaw - hfov/2;

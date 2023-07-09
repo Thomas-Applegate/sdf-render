@@ -25,6 +25,7 @@ private:
 
 	long marchRay(SDF[] sdfs, double[] distArr, const Ray r, double maxDist, out HitInfo h) @nogc
 	in(sdfs.length == distArr.length)
+	out(ret; ret >= 0)
 	{
 		double distAcc = 0.0;
 		long outIndex;
