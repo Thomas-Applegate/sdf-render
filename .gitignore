@@ -26,3 +26,4 @@ docs/
 
 #workspace specific files
 *.geany
+*.ppm
