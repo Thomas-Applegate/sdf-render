@@ -23,10 +23,11 @@ private:
 	SceneComponent[string] components;
 	Camera cam;
 
-	long marchRay(SDF[] sdfs, const Ray r, double maxDist, out HitInfo h) {
+	long marchRay(SDF[] sdfs, double[] distArr, const Ray r, double maxDist, out HitInfo h) @nogc
+	in(sdfs.length == distArr.length)
+	{
 		double distAcc = 0.0;
 		long outIndex;
-		double[] distArr = new double[](sdfs.length);
 		vec3 currentPoint = r.origin;
 		immutable double epsilon = 1e-9;
 		
@@ -96,16 +97,21 @@ public:
 			}
 		}
 		
+		//make distance array to be reused for each pixel
+		double[] distArr = new double[](renderables.length);
+		
 		//loop through all camera rays
 		for(uint y = 0; y < i.getHeight; y++) {
 			for(uint x = 0; x < i.getWidth; x++) {
 				Ray r = cam.computeRay(i, x, y);
 				HitInfo h;
-				long index = marchRay(cast(SDF[])renderables, r, 150, h);
+				long index = marchRay(cast(SDF[])renderables, distArr, r, 150, h);
 				
 				if(h.hit) {
 					vec3 color = renderables[index].getMaterial.getColor;
 					i.setPixel(x, y, color);
+				}else {
+					i.setPixel(x, y, vec3(0.0, 0.0, 0.0));
 				}
 			}
 		}
@@ -118,10 +124,10 @@ void main(string[] args)
 	PPM i = new PPM(512, 1.9);
 	Scene s = new Scene();
 	
-	Sphere cSphere = new Sphere(vec3(1, 0, 1.5), 1.0, new Material(vec3(0.0, 0.95, 0.95)));
+	Sphere cSphere = new Sphere(vec3(1, 0, 3), 1.0, new Material(vec3(0.0, 0.95, 0.95)));
 	s.setComponent("c-sphere", cSphere);
 	
-	Sphere mSphere = new Sphere(vec3(-1.25, 0, 2), 1.0, new Material(vec3(0.95,0.0,0.95)));
+	Sphere mSphere = new Sphere(vec3(-1.25, 0, 5), 1.0, new Material(vec3(0.95,0.0,0.95)));
 	s.setComponent("m-sphere", mSphere);
 	
 	s.render(i);

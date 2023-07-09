@@ -32,7 +32,7 @@ struct Camera {
 		yhighbound = pitch - vfov/2;
 	}
 	
-	Ray computeRay(Image i, uint x, uint y){
+	Ray computeRay(Image i, uint x, uint y) @nogc {
 		//compute theta
 		double theta;
 		double p = x/i.getWidth;

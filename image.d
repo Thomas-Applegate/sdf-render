@@ -1,9 +1,9 @@
 import vector;
 
 interface Image {
-	uint getWidth() const;
-	uint getHeight() const;
-	final double getAspectRatio() const {
+	uint getWidth() const @nogc;
+	uint getHeight() const @nogc;
+	final double getAspectRatio() const @nogc {
 		return cast(double)getWidth() / cast(double)getHeight();
 	}
 	void save(string filename) const;

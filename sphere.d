@@ -27,7 +27,7 @@ public:
 	void setMaterial(Material mat) { this.mat = mat; }
 	Material getMaterial() { return mat; }
 	
-	double sdf(const vec3 point) const {
+	double sdf(const vec3 point) const @nogc {
 		vec3 t = point + position;
 		return t.length - radius;
 	}

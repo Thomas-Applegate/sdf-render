@@ -22,11 +22,11 @@ public:
 		this(cast(uint)(aspectRatio * cast(double)height + 0.5), height);
 	}
 
-	uint getWidth() const {
+	uint getWidth() const @nogc {
 		return width;
 	}
 	
-	uint getHeight() const {
+	uint getHeight() const @nogc {
 		return height;
 	}
 	
