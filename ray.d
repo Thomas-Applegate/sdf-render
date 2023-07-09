@@ -15,5 +15,5 @@ public:
 
 	vec3 origin() const { return O; }
 	vec3 direction() const { return D; }
-	vec3 pointAtParameter(double t) const { return O + t * D; }
+	vec3 pointAtDistance(double t) const { return O + t * D; }
 }
