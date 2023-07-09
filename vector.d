@@ -30,7 +30,6 @@ public:
 	}
 
 	double opIndex(size_t i) { return e[i]; }
-	// pragma(inline, true) float* opIndex(size_t i) { return &e[i]; }
 
 	size_t dimension() const { return e.length; }
 

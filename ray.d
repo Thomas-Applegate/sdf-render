@@ -1,6 +1,6 @@
 import vector;
 
-struct ray
+struct Ray
 {
 public:
 	vec3 O;
