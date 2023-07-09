@@ -25,7 +25,7 @@ public:
 		this.components = components;
 	}
 	
-	this(SceneComponent[string] components, const Ray camera) {
+	this(SceneComponent[string] components, Ray camera) {
 		this(components);
 		this.camera = camera;
 	}
