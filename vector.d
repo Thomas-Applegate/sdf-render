@@ -112,7 +112,7 @@ vec3 reflect(const vec3 v, const vec3 n) @nogc
 //theta is measured from +x counterclockwise
 //phi is measured from the x axis going plus or minus 90 degrees up or down
 vec3 sphereCoord(double theta, double phi) @nogc {
-	theta *= 180/PI;
-	phi *= 180/PI;
+	theta *= PI/180;
+	phi *= PI/180;
 	return vec3(cos(phi)*cos(theta), sin(phi), cos(phi)*sin(theta));
 }

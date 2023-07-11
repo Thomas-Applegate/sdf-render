@@ -35,12 +35,12 @@ struct Camera {
 	Ray computeRay(Image i, uint x, uint y) @nogc {
 		//compute theta
 		double theta;
-		double p = x/i.getWidth;
+		double p = cast(double) x/i.getWidth;
 		theta = (1.0 - p) * xlowbound + xhighbound * p;
 		
 		//compute phi;
 		double phi;
-		p = y/i.getHeight;
+		p = cast(double) y/i.getHeight;
 		phi = (1.0 - p) * ylowbound + yhighbound * p;
 		
 		return Ray(pos, sphereCoord(theta, phi));

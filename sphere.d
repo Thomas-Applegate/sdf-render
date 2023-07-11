@@ -28,7 +28,7 @@ public:
 	Material getMaterial() { return mat; }
 	
 	double sdf(const vec3 point) const @nogc {
-		vec3 t = point + position;
+		vec3 t = point - position;
 		return t.length - radius;
 	}
 }

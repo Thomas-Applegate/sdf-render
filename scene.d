@@ -58,7 +58,7 @@ private:
 
 public:
 	this() {
-		cam = Camera(vec3(0.0,0.0,0.0), 45, 90, 0);
+		cam = Camera(vec3(0.0,0.0,0.0), 80, 90, -90);
 	}
 
 	this(SceneComponent[string] components) {
@@ -126,10 +126,13 @@ void main(string[] args)
 	PPM i = new PPM(512, 1.9);
 	Scene s = new Scene();
 	
-	Sphere cSphere = new Sphere(vec3(1, 0, 3), 1.0, new Material(vec3(0.0, 0.95, 0.95)));
+	Sphere cSphere = new Sphere(vec3(2, 0, 5), 1.0, new Material(vec3(0.0, 0.95, 0.95)));
 	s.setComponent("c-sphere", cSphere);
 	
-	Sphere mSphere = new Sphere(vec3(-1.25, 0, 5), 1.0, new Material(vec3(0.95,0.0,0.95)));
+	Sphere ySphere = new Sphere(vec3(-2, 0, 7), 1.0, new Material(vec3(0.95,0.95,0)));
+	s.setComponent("y-sphere", ySphere);
+	
+	Sphere mSphere = new Sphere(vec3(0, -5, 0), 1.0, new Material(vec3(0.95,0,0.95)));
 	s.setComponent("m-sphere", mSphere);
 	
 	s.render(i);

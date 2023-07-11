@@ -3,17 +3,17 @@ import vector;
 struct Ray
 {
 public:
-	vec3 O;
-	vec3 D;
+	vec3 Or;
+	vec3 Dir;
 
 	this(const vec3 o, const vec3 d) @nogc
 	{
-		O = o;
-		D = d;
-		D.makeUnitVector;
+		Or = o;
+		Dir = d;
+		Dir.makeUnitVector;
 	}
 
-	vec3 origin() const @nogc { return O; }
-	vec3 direction() const @nogc { return D; }
-	vec3 pointAtDistance(double t) const @nogc { return O + t * D; }
+	vec3 origin() const @nogc { return Or; }
+	vec3 direction() const @nogc { return Dir; }
+	vec3 pointAtDistance(double t) const @nogc { return Or + t * Dir; }
 }
