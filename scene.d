@@ -105,6 +105,7 @@ public:
 		for(uint y = 0; y < i.getHeight; y++) {
 			for(uint x = 0; x < i.getWidth; x++) {
 				Ray r = cam.computeRay(i, x, y);
+				
 				HitInfo h;
 				long index = marchRay(cast(SDF[])renderables, distArr, r, 150, h);
 				
