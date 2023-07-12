@@ -3,9 +3,8 @@ import vector;
 import renderable;
 import sdf;
 import material;
-import positionable;
 
-class Sphere : SceneComponent, Renderable, Positionable {
+class Sphere : SceneComponent, Renderable {
 private:
 	vec3 position;
 	double radius;

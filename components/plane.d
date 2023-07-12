@@ -4,6 +4,8 @@ import renderable;
 import material;
 import scene;
 
+import std.math;
+
 class Plane : SceneComponent, Renderable {
 private:
 	vec3 normal;
