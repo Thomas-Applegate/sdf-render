@@ -31,6 +31,6 @@ public:
 	Material getMaterial() { return mat; }
 	
 	double sdf(const vec3 point) const @nogc {
-		return dot(point, normal) + offset;
+		return abs(dot(point, normal) + offset);
 	}
 }

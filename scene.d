@@ -126,7 +126,7 @@ public:
 }
 
 void main(string[] args)
-{
+{	
 	PPM i = new PPM(512, 1.9);
 	Scene s = new Scene();
 	
