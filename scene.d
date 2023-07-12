@@ -23,18 +23,25 @@ class Scene {
 private:
 	SceneComponent[string] components;
 	Camera cam;
+	
+	bool inBounds(vec3 point, double maxDist) @nogc {
+		vec3 t = point - cam.origin;
+		if(t.x > maxDist) { return false; }
+		if(t.y > maxDist) { return false; }
+		if(t.z > maxDist) { return false; }
+		return true;
+	}
 
 	long marchRay(SDF[] sdfs, double[] distArr, const Ray r, double maxDist, out HitInfo h) @nogc
 	in(sdfs.length == distArr.length)
 	out(ret; ret >= 0)
 	{
 		double distAcc = 0.0;
-		uint stepAcc = 0;
 		long outIndex;
 		vec3 currentPoint = r.origin;
-		immutable double epsilon = 1e-9;
+		immutable double epsilon = 1e-6;
 		
-		while(distAcc <= maxDist && stepAcc <= 1000) {
+		while(inBounds(currentPoint, maxDist)) {
 			//march
 			foreach(i, s ; sdfs) {
 				distArr[i] = s.sdf(currentPoint);
@@ -45,14 +52,12 @@ private:
 			distAcc += distArr[outIndex];
 			currentPoint = r.pointAtDistance(distAcc);
 			
-			stepAcc++;
-			
 			//check if abs(min distance) <= epsilon. if so we hit and break
 			//otherwise keep marching
 			if(abs(distArr[outIndex]) <= epsilon) {//hit
 				h.hit = true;
 				h.point = currentPoint;
-				h.normal = computeNormal(sdfs[outIndex], currentPoint);
+				h.normal = sdfs[outIndex].sdfNormal(currentPoint);
 				break;
 			}
 		}
@@ -62,7 +67,7 @@ private:
 
 public:
 	this() {
-		cam = Camera(vec3(0.0,0.0,0.0), 80, 90, 0);
+		cam = Camera(vec3(0.0,0.0,0.0), 60);
 	}
 
 	this(SceneComponent[string] components) {
@@ -109,13 +114,17 @@ public:
 		//loop through all camera rays
 		for(uint y = 0; y < i.getHeight; y++) {
 			for(uint x = 0; x < i.getWidth; x++) {
-				Ray r = cam.computeRay(i, x, y);
+				double u = cast(double)x / (i.getWidth - 1);
+				double v = cast(double)y / (i.getHeight - 1);
+				Ray r = cam.computeRay(u, v);
 				
 				HitInfo h;
-				long index = marchRay(cast(SDF[])renderables, distArr, r, 150, h);
+				long index = marchRay(cast(SDF[])renderables, distArr, r, 100, h);
 				
 				if(h.hit) {
-					vec3 color = renderables[index].getMaterial.getColor;
+					//vec3 color = renderables[index].getMaterial.getColor;
+					vec3 color = h.normal;
+					color.makeUnitVector;
 					i.setPixel(x, y, color);
 				}else {
 					i.setPixel(x, y, vec3(0.0, 0.0, 0.0));
@@ -137,6 +146,9 @@ void main(string[] args)
 	
 	Sphere ySphere = new Sphere(vec3(-2, 1, 7), 1.0, new Material(vec3(0.95,0.95,0)));
 	s.setComponent("y-sphere", ySphere);
+	
+	Plane plane = new Plane(vec3(0, 1, 0), -2, new Material(vec3(0.8,0.8,0.8)));
+	s.setComponent("plane", plane);
 	
 	s.render(i);
 	i.save("render.ppm");

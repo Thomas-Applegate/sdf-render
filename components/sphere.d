@@ -30,4 +30,8 @@ public:
 		vec3 t = point - position;
 		return t.length - radius;
 	}
+	
+	vec3 sdfNormal(const vec3 point) const @nogc {
+		return (point - position)/radius;
+	}
 }

@@ -35,4 +35,7 @@ public:
 	double sdf(const vec3 point) const @nogc {
 		return abs(dot(point, normal) + offset);
 	}
+	vec3 sdfNormal(const vec3 point) const @nogc {
+		return normal;
+	}
 }
