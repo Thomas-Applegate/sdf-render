@@ -91,6 +91,7 @@ public:
 	}
 	
 	void render(Image i) {
+		writeln("Beginning Render");
 		cam.cacheImageInfo(i);
 		
 		//build renderable array
@@ -121,6 +122,7 @@ public:
 				}
 			}
 		}
+		writeln("Done!");
 	}
 
 }
